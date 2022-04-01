@@ -4,11 +4,11 @@ import { inputText } from '../redux/action';
 import { inputReduser } from '../redux/inputReduser';
 
 const Title = (props) => {
-    
+
     const text = useSelector(state => {
         const { inputReduser } = state;
         return inputReduser.text
-    }) / получати
+    }) // получати
    
     const dispatch = useDispatch() // відправляти  
     const handelChange = (e) => {
