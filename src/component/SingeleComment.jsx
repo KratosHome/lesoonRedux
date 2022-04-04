@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { commentUpdate } from '../redux/action';
+import { commentDelete, commentUpdate } from '../redux/action';
 import { useDispatch } from 'react-redux';
 
 const SingeleComment = ({ data }) => {
@@ -7,6 +7,18 @@ const SingeleComment = ({ data }) => {
     const { text, id } = data;
 
     const dispatch = useDispatch()
+
+    // оновлення кожного з коментарів 
+    const handleUpdate = (e) => {
+        e.preventDefault()
+        dispatch(commentUpdate(comentText, id))
+    }
+
+    const handelDelete = (e) => {
+        e.preventDefault()
+        dispatch(commentDelete(id))
+    }
+
 
     useEffect(() => {
         if (text) {
@@ -18,20 +30,16 @@ const SingeleComment = ({ data }) => {
         setComentText(e.target.value)
     }
 
-    // оновлення кожного з коментарів 
-    const handleUpdate = (e) =>{
-        e.preventDefault()
-         dispatch(commentUpdate(comentText, id))
-    }
 
- 
-    return (
-        <form onSubmit={handleUpdate} className='comments-item'>
-            <div className='comments-item-delete'>&times;</div>
-            <input type="text" value={comentText} onChange={handelInput} />
-            <input type="submit" hidden />
-        </form>
-    );
+
+
+return (
+    <form onSubmit={handleUpdate} className='comments-item'>
+        <div onClick={handelDelete} className='comments-item-delete'>&times;</div>
+        <input type="text" value={comentText} onChange={handelInput} />
+        <input type="submit" hidden />
+    </form>
+);
 }
 
 export default SingeleComment;
